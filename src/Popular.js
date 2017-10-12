@@ -96,13 +96,11 @@ class Popular extends Component {
         });
 
     fetchPopularRepos(lang)
-        .then(function (repos) {
+        .then((repos)=> {
             console.log(repos);
-            this.setState(function () {
-                return {
-                    repos:repos,
-                }
-            }.bind(this));
+            this.setState({
+                repos
+            })
         });
     }
 
