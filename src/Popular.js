@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // var PopularRepos = require( './api.js');
 
 import fetchPopularRepos from './api.js';
+import getPersonalInfo from './glostarsApi.js';
 
 // import Api from './api.js';
 
@@ -61,6 +62,61 @@ function ReposGrid(props) {
 
 }
 
+function onChange(e){
+    this.setState({
+        [e.target.name] : e.target.value
+    })
+}
+
+function onSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+}
+
+function GlostarsForm() {
+    return(
+        <div className="container">
+            <form onSubmit={this.onSubmit.bind(this)}>
+                <div className="form-group">
+                    <label htmlFor="exampleInput1">First Name</label>
+                    <input type="text" className="form-control" id="exampleInput1" name="Name" value={this.state.Name} onChange={this.onChange.bind(this)}/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleInput2">Last Name</label>
+                    <input type="text" className="form-control" id="exampleInput2" name="LastName"  value={this.state.LastName} onChange={this.onChange.bind(this)}/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleInput3">Gender</label>
+                    <input type="text" className="form-control" id="exampleInput3"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleInput4">Birth Year</label>
+                    <input type="number" className="form-control" id="exampleInput4"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleInput5">Birth Month</label>
+                    <input type="text" className="form-control" id="exampleInput5"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleInput6">Birth Year</label>
+                    <input type="number" className="form-control" id="exampleInput6"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleInput7">Email address</label>
+                    <input type="email" className="form-control" id="exampleInput7"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleInput8">Password</label>
+                    <input type="password" className="form-control" id="exampleInput8"/>
+                </div>
+
+                <button type="submit" className="btn btn-default">Submit</button>
+            </form>
+        </div>
+        )
+
+}
+
 
 SelectLanguage.propTypes = {
     selectedLanguage: PropTypes.string.isRequired,
@@ -76,7 +132,15 @@ class Popular extends Component {
         super(props);
         this.state = {
             selectedLanguage: 'All',
-            repos: null
+            repos: null,
+            Name: '',
+            LastName:'',
+            Gender: '',
+            Email: '',
+            BirthdayYear: '',
+            BirthdayMonth: '',
+            BirthdayDay: '',
+            Password: ''
         };
 
         this.updateLanguage = this.updateLanguage.bind(this);
@@ -107,12 +171,13 @@ class Popular extends Component {
     render() {
         return (
             <div>
-                <SelectLanguage
-                    selectedLanguage={this.state.selectedLanguage}
-                    onSelect={this.updateLanguage}/>
+                {/*<SelectLanguage*/}
+                    {/*selectedLanguage={this.state.selectedLanguage}*/}
+                    {/*onSelect={this.updateLanguage}/>*/}
                 {/*{JSON.stringify(this.state.repos,null,2)}*/}
-                {!this.state.repos ? <p>Loading</p> :
-                    <ReposGrid repos = {this.state.repos}/> }
+                {/*{!this.state.repos ? <p>Loading</p> :*/}
+                    {/*<ReposGrid repos = {this.state.repos}/> }*/}
+                <GlostarsForm/>
             </div>
         );
     }
